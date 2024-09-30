@@ -16,10 +16,8 @@ The Room Booking API is a RESTful service that allows users to manage room booki
 - Java 17
 - Spring Boot
 - Spring Data JPA
-- Hibernate
-- PostgreSQL (or any SQL database)
+- H2 Database
 - Maven
-- Lombok (for reducing boilerplate code)
 
 ## API Endpoints
 
