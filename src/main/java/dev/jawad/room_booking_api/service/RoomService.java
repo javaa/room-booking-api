@@ -50,7 +50,7 @@ public class RoomService {
         if (existingRoom != null) {
             existingRoom.setName(roomDetails.getName());
             existingRoom.setCapacity(roomDetails.getCapacity());
-            existingRoom.setAvailable(roomDetails.isAvailable());
+            existingRoom.setAvailabilty(roomDetails.getAvailability());
             return roomRepository.save(existingRoom);
         }
         throw new ApplicationException(Errors.ROOM_NOT_FOUND, Map.of("id", roomId));
@@ -69,7 +69,7 @@ public class RoomService {
 
         // Filter rooms based on availability
         return allRooms.stream()
-                .filter(room -> room.isAvailable() && isRoomAvailable(room.getId(), startTime, endTime))
+                .filter(room -> room.getAvailability() && isRoomAvailable(room.getId(), startTime, endTime))
                 .collect(Collectors.toList());
     }
 

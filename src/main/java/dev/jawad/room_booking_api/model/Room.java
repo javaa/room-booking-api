@@ -11,7 +11,7 @@ public class Room {
 
     private String name;
     private int capacity;
-    private boolean isAvailable;
+    private boolean availability;
 
     // Getter for roomId
     public Long getId() {
@@ -44,12 +44,12 @@ public class Room {
     }
 
     // Getter for availability
-    public boolean isAvailable() {
-        return isAvailable;
+    public boolean getAvailability() {
+        return availability;
     }
 
     // Setter for availability
-    public void setAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
+    public void setAvailabilty(boolean availability) {
+        this.availability = availability;
     }
 }
