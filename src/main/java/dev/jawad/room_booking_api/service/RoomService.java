@@ -1,5 +1,6 @@
 package dev.jawad.room_booking_api.service;
 
+import dev.jawad.room_booking_api.exception.ApplicationException;
 import dev.jawad.room_booking_api.model.Booking;
 import dev.jawad.room_booking_api.model.Room;
 import dev.jawad.room_booking_api.payload.RoomAvailabilityRequest;
@@ -11,11 +12,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-
+import dev.jawad.room_booking_api.errors.Errors;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Map;
 
 @Service
 public class RoomService {
@@ -32,7 +33,7 @@ public class RoomService {
         .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))) {
           return roomRepository.save(room);
         } else {
-          throw new RuntimeException("You do not have permission to create a room. Only Admin is allowed to create rooms");
+          throw new ApplicationException(Errors.NO_PERMISSION);
         }
     }
 
@@ -52,7 +53,7 @@ public class RoomService {
             existingRoom.setAvailable(roomDetails.isAvailable());
             return roomRepository.save(existingRoom);
         }
-        return null; // or throw an exception
+        throw new ApplicationException(Errors.ROOM_NOT_FOUND, Map.of("id", roomId));
     }
 
     public void deleteRoom(Long roomId) {

@@ -1,5 +1,7 @@
 package dev.jawad.room_booking_api.security;
 
+import dev.jawad.room_booking_api.errors.Errors;
+import dev.jawad.room_booking_api.exception.ApplicationException;
 import dev.jawad.room_booking_api.model.User;
 import dev.jawad.room_booking_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import java.util.Map;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -24,7 +27,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public UserDetails loadUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(
-            () -> new UsernameNotFoundException("User not found with id : " + id)
+            () -> new ApplicationException(Errors.USER_NOT_FOUND, Map.of("id", id))
+            // () -> new UsernameNotFoundException("User not found with id : " + id)
         );
 
         return UserPrincipal.create(user);

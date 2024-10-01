@@ -1,6 +1,8 @@
 package dev.jawad.room_booking_api.service;
 
 import dev.jawad.room_booking_api.model.User;
+import dev.jawad.room_booking_api.errors.Errors;
+import dev.jawad.room_booking_api.exception.ApplicationException;
 import dev.jawad.room_booking_api.model.Booking;
 import dev.jawad.room_booking_api.security.UserPrincipal;
 import dev.jawad.room_booking_api.repository.BookingRepository;
@@ -9,23 +11,17 @@ import dev.jawad.room_booking_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.Authentication;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
 import java.util.List;
-
+import java.util.Map;
 @Service
 public class BookingService {
-  private static final Logger logger = LoggerFactory.getLogger(BookingService.class);
     @Autowired
     private BookingRepository bookingRepository;
-
-    @Autowired
-    private RoomRepository roomRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -33,25 +29,29 @@ public class BookingService {
     public Booking createBooking(Booking booking) {
         // Validate start time and end time
         if (booking.getStartTime().isAfter(booking.getEndTime())) {
-          throw new IllegalArgumentException("Start time must be before end time.");
+          // throw new IllegalArgumentException("Start time must be before end time.");
+          throw new ApplicationException(Errors.START_TIME_AFTER_END_TIME);
         }
         // Check room booking for past times.
         if (booking.getStartTime().isBefore(LocalDateTime.now())) {
-          throw new IllegalArgumentException("Cannot book a room for past times.");
+          // throw new IllegalArgumentException("Cannot book a room for past times.");
+          throw new ApplicationException(Errors.PAST_BOOKING_TIME);
         }
 
         // Check if the room is available during the requested time
         if (!isRoomAvailable(booking.getRoom().getId(), booking.getStartTime(), booking.getEndTime())) {
-          throw new IllegalArgumentException("Room is not available during the requested time.");
+          // throw new IllegalArgumentException("Room is not available during the requested time.");
+          throw new ApplicationException(Errors.ROOM_NOT_AVAILABLE);
         }
 
         // Get currently authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long userId = ((UserPrincipal) authentication.getPrincipal()).getId(); // Assuming UserPrincipal has getId()
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+        Long userId = userPrincipal.getId();
 
         // Set the user for the booking
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new ApplicationException(Errors.USER_NOT_FOUND, Map.of("id", userId)));
 
         booking.setUser(user); // Set the authenticated user to the booking
 
