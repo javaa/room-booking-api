@@ -29,20 +29,23 @@ The Room Booking API is a RESTful service that allows users to manage room booki
 - **POST /api/auth/signin**
   - Authenticate the user and return a JWT token.
 
+- **POST /api/auth/signout**
+  - Signout User.
+
 ### 2. Room Management
 
 - **GET /api/rooms**
   - Retrieve all rooms.
-  
+
 - **POST /api/rooms**
   - Create a new room.
-  
+
 - **GET /api/rooms/{id}**
   - Get details of a specific room by ID.
-  
+
 - **PUT /api/rooms/{id}**
   - Update details of a specific room by ID.
-  
+
 - **DELETE /api/rooms/{id}**
   - Delete a specific room by ID.
 
@@ -50,7 +53,7 @@ The Room Booking API is a RESTful service that allows users to manage room booki
 
 - **POST /api/bookings/**
   - Create a new booking.
-  
+
 - **GET /api/bookings/{id}**
   - Retrieve details of a specific booking by ID.
 
@@ -58,7 +61,7 @@ The Room Booking API is a RESTful service that allows users to manage room booki
 
 - **POST /api/rooms/available**
   - Check available rooms within a given time range.
-  
+
 #### Request Body Example:
 ```json
 {
