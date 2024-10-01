@@ -11,24 +11,91 @@
 				{
 					"name": "Sign up",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"mohamed\",\n    \"email\": \"mohamed@gmail.com\",\n    \"password\": \"welcome@01\",\n    \"role\": \"ROLE_ADMIN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Sign in",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"mohamed\",\n    \"password\": \"welcome@01\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"signin"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Sign out",
 					"request": {
-						"method": "GET",
-						"header": []
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3Njc5MTUxLCJleHAiOjE3Mjc2ODI3NTF9.47Bl6rG_nAjkppWgBJ12UWh1szUbQa_Bz6D62rdPhDj44M_hWyAbXUj44vR8F2Mm2hnKZTeT6Lj9KmmVKcU47g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/auth/signout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"signout"
+							]
+						}
 					},
 					"response": []
 				},
@@ -36,7 +103,20 @@
 					"name": "All Users",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/auth/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"auth",
+								"users"
+							]
+						}
 					},
 					"response": []
 				}
@@ -53,7 +133,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3Njk1NDk2LCJleHAiOjE3Mjc2OTkwOTZ9.012qD03vxVrcn7w_pcyvZonYmLP4dVykuDH1yCjYISXp7akjwtNT_kycQqfctov_LYirc6K1bpFWbK5Btwbk1g",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzU1NDc4LCJleHAiOjE3Mjc3NTkwNzh9.IJ7oWNssubIKHqEEB-NzPmz7Me87qI7ovRlGouJQ4n6LDU9ORaMiCedQ3E1xPUu-mxdBk9WqUEwTjQFzx00UnQ",
 									"type": "string"
 								}
 							]
@@ -84,7 +164,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzE3MzE0LCJleHAiOjE3Mjc3MjA5MTR9.EBuJMv8BW6fyS48k2OLAHLj9FyHwzf2cene69fhYsCZB4RWidwlktEROvkhFakCNMt_w80GpH5AJZEn_7EJQMQ",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzYyMzE0LCJleHAiOjE3Mjc3NjU5MTR9.TldzVf8jfPEwTaWeKt720kmTHRXSALJ-DRhAYR5k4BEWm5j5i25fEhoGvg6faQRSYQ29Pz6erCbw1UnTRXfo4w",
 									"type": "string"
 								}
 							]
@@ -93,7 +173,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Room C\",\n    \"capacity\": \"2\",\n    \"is_availability\": \"true\"\n}",
+							"raw": "{\n    \"name\": \"Room C\",\n    \"capacity\": \"2\",\n    \"availability\": \"false\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -124,7 +204,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzE3MzE0LCJleHAiOjE3Mjc3MjA5MTR9.EBuJMv8BW6fyS48k2OLAHLj9FyHwzf2cene69fhYsCZB4RWidwlktEROvkhFakCNMt_w80GpH5AJZEn_7EJQMQ",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzYyMzE0LCJleHAiOjE3Mjc3NjU5MTR9.TldzVf8jfPEwTaWeKt720kmTHRXSALJ-DRhAYR5k4BEWm5j5i25fEhoGvg6faQRSYQ29Pz6erCbw1UnTRXfo4w",
 									"type": "string"
 								}
 							]
@@ -133,7 +213,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"startTime\": \"2024-10-01T10:00:00\",\n    \"endTime\": \"2024-10-01T12:00:00\"\n}",
+							"raw": "{\n    \"startTime\": \"2024-12-01T10:00:00\",\n    \"endTime\": \"2024-12-01T12:00:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -169,7 +249,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzA0MTgxLCJleHAiOjE3Mjc3MDc3ODF9.7YAOpN4jV1jKRi450uADdQ22K0ktk5RsaAa8tBkUb1OYBd1t5rvGjIi5TV61Gx87cW2m1oH2PN5n_o0cfEHKsg",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzYyMzE0LCJleHAiOjE3Mjc3NjU5MTR9.TldzVf8jfPEwTaWeKt720kmTHRXSALJ-DRhAYR5k4BEWm5j5i25fEhoGvg6faQRSYQ29Pz6erCbw1UnTRXfo4w",
 									"type": "string"
 								}
 							]
@@ -178,7 +258,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"roomId\": 1,\n    \"startTime\": \"2024-10-01T10:00:00\",\n    \"endTime\": \"2024-10-01T12:00:00\"\n}",
+							"raw": "{\n    \"roomId\": 2,\n    \"capacity\": 2,\n    \"startTime\": \"2024-11-01T10:00:00\",\n    \"endTime\": \"2024-11-01T12:00:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -204,14 +284,49 @@
 				{
 					"name": "List User Bookings",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzYyMzE0LCJleHAiOjE3Mjc3NjU5MTR9.TldzVf8jfPEwTaWeKt720kmTHRXSALJ-DRhAYR5k4BEWm5j5i25fEhoGvg6faQRSYQ29Pz6erCbw1UnTRXfo4w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/bookings/user/1/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"bookings",
+								"user",
+								"1",
+								"bookings"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Cancel Booking By Id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzU2Njc1LCJleHAiOjE3Mjc3NjAyNzV9.scsVtBO2zq00HahavBpE2UyNUexowcBsHhx2T-H38gLMXCjmtI4ex1AwaGqtuKsXH6P6JM1yKn1kqTe1gLOpeA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
