@@ -18,6 +18,7 @@ import dev.jawad.room_booking_api.service.RoomService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Collections;
 
 @RestController
@@ -59,13 +60,26 @@ public class RoomController {
     }
 
     @PostMapping("/available")
-    public ResponseEntity<List<Room>> getAvailableRooms(@RequestBody RoomAvailabilityRequest request) {
-        List<Room> availableRooms = roomService.findAvailableRooms(request);
+    public ResponseEntity<?> getAvailableRooms(@RequestBody RoomAvailabilityRequest request) {
+        // Set default values for page and size if not provided
+        int page = request.getPage() > 0 ? request.getPage() : 0; // Default to 0 if page is not positive
+        int size = request.getSize() > 0 ? request.getSize() : 10; // Default to 10 if size is not positive
+
+        // Validate that size is at least 1
+        if (size < 1) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Page size must be at least one."));
+        }
+
+        // Update the request object with validated values
+        request.setPage(page);
+        request.setSize(size);
+
+        Page<Room> availableRooms = roomService.findAvailableRooms(request);
 
         if (availableRooms.isEmpty()) {
             return ResponseEntity.noContent().build(); // Return 204 No Content if no rooms are available
         }
 
-        return ResponseEntity.ok(availableRooms); // Return 200 OK with available rooms
+        return ResponseEntity.ok(availableRooms);
     }
 }
