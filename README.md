@@ -19,52 +19,166 @@ The Room Booking API is a RESTful service that allows users to manage room booki
 - H2 Database
 - Maven
 
-## API Endpoints
+# RoomBookingAPI Documentation
 
-### 1. User Authentication
+This document provides an overview of the RoomBookingAPI endpoints, including authentication, room management, and booking functionalities.
 
-- **POST /api/auth/signup**
-  - Create a user.
+## Base URL
 
-- **POST /api/auth/signin**
-  - Authenticate the user and return a JWT token.
+All endpoints are relative to: `http://localhost:8081/api`
 
-- **POST /api/auth/signout**
-  - Signout User.
+## Authentication
 
-### 2. Room Management
+### Sign Up
 
-- **GET /api/rooms**
-  - Retrieve all rooms.
+Create a new user account.
 
-- **POST /api/rooms**
-  - Create a new room.
+- **URL**: `/auth/signup`
+- **Method**: POST
+- **Body**:
+  ```json
+  {
+    "username": "string",
+    "email": "string",
+    "password": "string",
+    "role": "string"
+  }
+  ```
+- **Response**: User creation confirmation
 
-- **GET /api/rooms/{id}**
-  - Get details of a specific room by ID.
+### Sign In
 
-- **PUT /api/rooms/{id}**
-  - Update details of a specific room by ID.
+Authenticate a user and receive a JWT token.
 
-- **DELETE /api/rooms/{id}**
-  - Delete a specific room by ID.
+- **URL**: `/auth/signin`
+- **Method**: POST
+- **Body**:
+  ```json
+  {
+    "username": "string",
+    "password": "string"
+  }
+  ```
+- **Response**: JWT token for authentication
 
-### 3. Booking Management
+### Sign Out
 
-- **POST /api/bookings/**
-  - Create a new booking.
+Invalidate the current user's session.
 
-- **GET /api/bookings/{id}**
-  - Retrieve details of a specific booking by ID.
+- **URL**: `/auth/signout`
+- **Method**: POST
+- **Headers**:
+  - Authorization: Bearer {JWT_TOKEN}
+- **Response**: Signout confirmation
 
-### 4. Room Availability Check
+### Get All Users
 
-- **POST /api/rooms/available**
-  - Check available rooms within a given time range.
+Retrieve a list of all users (admin only).
 
-#### Request Body Example:
-```json
-{
-    "startTime": "2024-10-01T10:00:00",
-    "endTime": "2024-10-01T12:00:00"
-}
+- **URL**: `/auth/users`
+- **Method**: GET
+- **Headers**:
+  - Authorization: Bearer {JWT_TOKEN}
+- **Response**: List of user objects
+
+## Room Management
+
+### Get All Rooms
+
+Retrieve a list of all available rooms.
+
+- **URL**: `/rooms/`
+- **Method**: GET
+- **Headers**:
+  - Authorization: Bearer {JWT_TOKEN}
+- **Response**: List of room objects
+
+### Create Room
+
+Add a new room to the system (admin only).
+
+- **URL**: `/rooms/`
+- **Method**: POST
+- **Headers**:
+  - Authorization: Bearer {JWT_TOKEN}
+- **Body**:
+  ```json
+  {
+    "name": "string",
+    "capacity": "integer",
+    "availability": "boolean"
+  }
+  ```
+- **Response**: Created room object
+
+### Check Room Availability
+
+Check room availability for a specific time slot.
+
+- **URL**: `/rooms/available`
+- **Method**: POST
+- **Headers**:
+  - Authorization: Bearer {JWT_TOKEN}
+- **Body**:
+  ```json
+  {
+    "startTime": "ISO8601 datetime",
+    "endTime": "ISO8601 datetime"
+  }
+  ```
+- **Response**: List of available room objects
+
+## Booking Management
+
+### Create Booking
+
+Create a new room booking.
+
+- **URL**: `/bookings/`
+- **Method**: POST
+- **Headers**:
+  - Authorization: Bearer {JWT_TOKEN}
+- **Body**:
+  ```json
+  {
+    "roomId": "integer",
+    "capacity": "integer",
+    "startTime": "ISO8601 datetime",
+    "endTime": "ISO8601 datetime"
+  }
+  ```
+- **Response**: Created booking object
+
+### List User Bookings
+
+Retrieve all bookings for a specific user.
+
+- **URL**: `/bookings/user/{userId}/bookings`
+- **Method**: GET
+- **Headers**:
+  - Authorization: Bearer {JWT_TOKEN}
+- **Response**: List of booking objects for the specified user
+
+### Cancel Booking
+
+Cancel an existing booking by its ID.
+
+- **URL**: `/bookings/{bookingId}`
+- **Method**: DELETE
+- **Headers**:
+  - Authorization: Bearer {JWT_TOKEN}
+- **Response**: Booking cancellation confirmation
+
+## Error Handling
+
+All endpoints may return appropriate HTTP status codes for different scenarios:
+
+- 200 OK: Successful operation
+- 201 Created: Resource successfully created
+- 400 Bad Request: Invalid input or parameters
+- 401 Unauthorized: Authentication failure or invalid token
+- 403 Forbidden: Insufficient permissions
+- 404 Not Found: Requested resource not found
+- 500 Internal Server Error: Unexpected server error
+
+For detailed error messages, refer to the response body of the API calls.
