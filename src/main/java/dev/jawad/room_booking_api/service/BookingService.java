@@ -4,6 +4,7 @@ import dev.jawad.room_booking_api.model.User;
 import dev.jawad.room_booking_api.errors.Errors;
 import dev.jawad.room_booking_api.exception.ApplicationException;
 import dev.jawad.room_booking_api.model.Booking;
+import dev.jawad.room_booking_api.model.Room;
 import dev.jawad.room_booking_api.security.UserPrincipal;
 import dev.jawad.room_booking_api.repository.BookingRepository;
 import dev.jawad.room_booking_api.repository.RoomRepository;
@@ -56,6 +57,10 @@ public class BookingService {
         booking.setUser(user); // Set the authenticated user to the booking
 
         return bookingRepository.save(booking);
+    }
+
+    public Page<Booking> getAllBookings(int page, int size) {
+        return bookingRepository.findAll(PageRequest.of(page, size));
     }
 
     public void cancelBooking(Long bookingId) {
