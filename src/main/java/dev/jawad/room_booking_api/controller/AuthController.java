@@ -1,5 +1,7 @@
 package dev.jawad.room_booking_api.controller;
 
+import dev.jawad.room_booking_api.errors.Errors;
+import dev.jawad.room_booking_api.exception.ApplicationException;
 import dev.jawad.room_booking_api.model.Room;
 import dev.jawad.room_booking_api.model.User;
 import dev.jawad.room_booking_api.repository.UserRepository;
@@ -89,12 +91,6 @@ public class AuthController {
             }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or missing token");
-    }
-
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        return ResponseEntity.ok(users);
     }
 
 }

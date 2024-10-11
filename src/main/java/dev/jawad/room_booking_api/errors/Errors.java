@@ -4,7 +4,7 @@ import dev.jawad.room_booking_api.exception.ErrorResponse;
 import org.springframework.http.HttpStatus;
 
 public enum Errors implements ErrorResponse {
-    NO_PERMISSION("NO_PERMISSION", HttpStatus.FORBIDDEN, "You do not have permission to create a room. Only Admin is allowed to create rooms"),
+    NO_PERMISSION("NO_PERMISSION", HttpStatus.FORBIDDEN, "You do not have permission. Only Admin is allowed to perform this action."),
     ROOM_NOT_FOUND("ROOM_NOT_FOUND", HttpStatus.NOT_FOUND, "Room with id {id} not found"),
     INVALID_ROOM_CAPACITY("INVALID_ROOM_CAPACITY", HttpStatus.BAD_REQUEST, "The requested room capacity exceeds the maximum allowed capacity"),
     BOOKING_TIME_CONFLICT("BOOKING_TIME_CONFLICT", HttpStatus.CONFLICT, "The room is already booked for the selected time range"),
