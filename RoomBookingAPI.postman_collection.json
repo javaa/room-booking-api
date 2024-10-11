@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "cbc83dee-5790-4cba-a8a2-4aaa32930a00",
+		"_postman_id": "7d3d7890-b3f2-4ea7-843c-e056a514cc56",
 		"name": "RoomBookingAPI",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1240482"
 	},
 	"item": [
 		{
@@ -102,10 +103,20 @@
 				{
 					"name": "All Users",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI4NjE0MTExLCJleHAiOjE3Mjg2MTc3MTF9.neEUKSgVjf9kB1WPYSIuOraUVlcb09rsTBENg-YSelm_TrDMjjA0IMCfby5wr2Dscjtu8AHOQm9GgiIs3BbX_Q",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/auth/users",
+							"raw": "http://localhost:8081/api/users/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -113,8 +124,8 @@
 							"port": "8081",
 							"path": [
 								"api",
-								"auth",
-								"users"
+								"users",
+								""
 							]
 						}
 					},
@@ -133,7 +144,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzU1NDc4LCJleHAiOjE3Mjc3NTkwNzh9.IJ7oWNssubIKHqEEB-NzPmz7Me87qI7ovRlGouJQ4n6LDU9ORaMiCedQ3E1xPUu-mxdBk9WqUEwTjQFzx00UnQ",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI4NjQyNTk0LCJleHAiOjE3Mjg2NDYxOTR9.ol9tkaCcC-bOYVz67hljlZBmaxyI3pSQgY5iZrdpFHid-vUVn6nZ2p-aX9V489RbSlBWzKc9QDt_xQzJzD0uXA",
 									"type": "string"
 								}
 							]
@@ -164,7 +175,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzYyMzE0LCJleHAiOjE3Mjc3NjU5MTR9.TldzVf8jfPEwTaWeKt720kmTHRXSALJ-DRhAYR5k4BEWm5j5i25fEhoGvg6faQRSYQ29Pz6erCbw1UnTRXfo4w",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI4NjQyNTk0LCJleHAiOjE3Mjg2NDYxOTR9.ol9tkaCcC-bOYVz67hljlZBmaxyI3pSQgY5iZrdpFHid-vUVn6nZ2p-aX9V489RbSlBWzKc9QDt_xQzJzD0uXA",
 									"type": "string"
 								}
 							]
@@ -173,7 +184,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Room C\",\n    \"capacity\": \"2\",\n    \"availability\": \"false\"\n}",
+							"raw": "{\n    \"name\": \"Room C\",\n    \"capacity\": \"2\",\n    \"availability\": \"true\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -191,6 +202,108 @@
 								"api",
 								"rooms",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Room",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI4NjQyNTk0LCJleHAiOjE3Mjg2NDYxOTR9.ol9tkaCcC-bOYVz67hljlZBmaxyI3pSQgY5iZrdpFHid-vUVn6nZ2p-aX9V489RbSlBWzKc9QDt_xQzJzD0uXA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/rooms/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"rooms",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Room",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI4NjQyNTk0LCJleHAiOjE3Mjg2NDYxOTR9.ol9tkaCcC-bOYVz67hljlZBmaxyI3pSQgY5iZrdpFHid-vUVn6nZ2p-aX9V489RbSlBWzKc9QDt_xQzJzD0uXA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Room Z\",\n    \"capacity\": \"6\",\n    \"availability\": \"true\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/rooms/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"rooms",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Room",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI4NjQyNTk0LCJleHAiOjE3Mjg2NDYxOTR9.ol9tkaCcC-bOYVz67hljlZBmaxyI3pSQgY5iZrdpFHid-vUVn6nZ2p-aX9V489RbSlBWzKc9QDt_xQzJzD0uXA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/rooms/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"rooms",
+								"3"
 							]
 						}
 					},
@@ -249,7 +362,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzYyMzE0LCJleHAiOjE3Mjc3NjU5MTR9.TldzVf8jfPEwTaWeKt720kmTHRXSALJ-DRhAYR5k4BEWm5j5i25fEhoGvg6faQRSYQ29Pz6erCbw1UnTRXfo4w",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI4NjQyNTk0LCJleHAiOjE3Mjg2NDYxOTR9.ol9tkaCcC-bOYVz67hljlZBmaxyI3pSQgY5iZrdpFHid-vUVn6nZ2p-aX9V489RbSlBWzKc9QDt_xQzJzD0uXA",
 									"type": "string"
 								}
 							]
@@ -258,7 +371,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"roomId\": 2,\n    \"capacity\": 2,\n    \"startTime\": \"2024-11-01T10:00:00\",\n    \"endTime\": \"2024-11-01T12:00:00\"\n}",
+							"raw": "{\n    \"roomId\": 1,\n    \"capacity\": 2,\n    \"startTime\": \"2024-11-01T10:00:00\",\n    \"endTime\": \"2024-11-01T12:00:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -276,6 +389,108 @@
 								"api",
 								"bookings",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI4NjM3ODQzLCJleHAiOjE3Mjg2NDE0NDN9.ob4nmnYhIAfpu3H8fTYUBTa0SA5k3_SVhRqoAgTegaUE4k85XQGybp9JAQu6psCmbhohP-4GVwsORSQzfUCgjA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/bookings/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"bookings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI4NjQyNTk0LCJleHAiOjE3Mjg2NDYxOTR9.ol9tkaCcC-bOYVz67hljlZBmaxyI3pSQgY5iZrdpFHid-vUVn6nZ2p-aX9V489RbSlBWzKc9QDt_xQzJzD0uXA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"room\": {\n        \"id\": 3\n    },\n    \"capacity\": 3,\n    \"startTime\": \"2024-11-01T10:00:00\",\n    \"endTime\": \"2024-11-01T12:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/bookings/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"bookings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Booking By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI4NjQyNTk0LCJleHAiOjE3Mjg2NDYxOTR9.ol9tkaCcC-bOYVz67hljlZBmaxyI3pSQgY5iZrdpFHid-vUVn6nZ2p-aX9V489RbSlBWzKc9QDt_xQzJzD0uXA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/bookings/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"bookings",
+								"1"
 							]
 						}
 					},
@@ -315,22 +530,22 @@
 					"response": []
 				},
 				{
-					"name": "Cancel Booking By Id",
+					"name": "All Bookings",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI3NzU2Njc1LCJleHAiOjE3Mjc3NjAyNzV9.scsVtBO2zq00HahavBpE2UyNUexowcBsHhx2T-H38gLMXCjmtI4ex1AwaGqtuKsXH6P6JM1yKn1kqTe1gLOpeA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzI4NjIxMDI4LCJleHAiOjE3Mjg2MjQ2Mjh9.HvkceLw7Bdm96Q6tq1wFxJaWn-sV2PRyiYtIfS45a2wv47vLL0oyJfR2Si-ZM1F4Uqm2PKMhfgGTQmAW1EXpbg",
 									"type": "string"
 								}
 							]
 						},
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/api/bookings/1",
+							"raw": "http://localhost:8081/api/bookings/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -339,7 +554,7 @@
 							"path": [
 								"api",
 								"bookings",
-								"1"
+								""
 							]
 						}
 					},
