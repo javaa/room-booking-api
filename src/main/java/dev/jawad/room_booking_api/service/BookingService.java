@@ -25,6 +25,9 @@ public class BookingService {
     private BookingRepository bookingRepository;
 
     @Autowired
+    private RoomRepository roomRepository;
+
+    @Autowired
     private UserRepository userRepository;
 
     public Booking createBooking(Booking booking) {
@@ -57,6 +60,33 @@ public class BookingService {
         booking.setUser(user); // Set the authenticated user to the booking
 
         return bookingRepository.save(booking);
+    }
+
+    public Booking getBookingById(Long bookingId) {
+      return bookingRepository.findById(bookingId).orElse(null);
+    }
+
+    public Booking updateBooking(Long bookingId, Booking bookingDetails) {
+      Booking existingBooking = getBookingById(bookingId);
+      Long roomId = bookingDetails.getRoom().getId();
+      // Check if the room from bookingDetails is not null
+      // if (bookingDetails.getRoomId() == null) {
+      //     throw new IllegalArgumentException("Room cannot be null");
+      // }
+
+      // // Ensure the room exists in the database
+      Room room = roomRepository.findById(roomId)
+              .orElseThrow(() -> new IllegalArgumentException("Room not found with ID: " + bookingDetails.getRoom().getId()));
+
+      // Update the existing booking with new details
+      if (existingBooking != null) {
+          existingBooking.setRoom(room); // Set the Room object here
+          existingBooking.setStartTime(bookingDetails.getStartTime());
+          existingBooking.setEndTime(bookingDetails.getEndTime());
+          return bookingRepository.save(existingBooking);
+      }
+
+      throw new ApplicationException(Errors.BOOKING_NOT_FOUND, Map.of("id", bookingId));
     }
 
     public Page<Booking> getAllBookings(int page, int size) {

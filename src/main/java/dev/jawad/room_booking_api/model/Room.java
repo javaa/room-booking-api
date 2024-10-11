@@ -13,6 +13,14 @@ public class Room {
     private int capacity;
     private boolean availability;
 
+    public Room() {
+    }
+
+    // Constructor with parameters
+    public Room(Long id) {
+        this.id = id;
+    }
+
     // Getter for roomId
     public Long getId() {
         return id;

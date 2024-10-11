@@ -78,12 +78,23 @@ public class BookingController {
       }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Booking> getBookingById(@PathVariable Long id) {
+        Booking booking = bookingService.getBookingById(id);
+        return ResponseEntity.ok(booking);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Booking> updateBooking(@PathVariable Long id, @RequestBody Booking bookingDetails) {
+        Booking updateBooking = bookingService.updateBooking(id, bookingDetails);
+        return updateBooking != null ? ResponseEntity.ok(updateBooking) : ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> cancelBooking(@PathVariable Long id) {
         bookingService.cancelBooking(id);
         return ResponseEntity.noContent().build();
     }
-
 
     @GetMapping("/user/{userId}/bookings")
     public ResponseEntity<Page<Booking>> listBookingsByUser(

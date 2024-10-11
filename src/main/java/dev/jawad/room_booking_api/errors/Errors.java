@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 public enum Errors implements ErrorResponse {
     NO_PERMISSION("NO_PERMISSION", HttpStatus.FORBIDDEN, "You do not have permission. Only Admin is allowed to perform this action."),
     ROOM_NOT_FOUND("ROOM_NOT_FOUND", HttpStatus.NOT_FOUND, "Room with id {id} not found"),
+    BOOKING_NOT_FOUND("BOOKING_NOT_FOUND", HttpStatus.NOT_FOUND, "Booking with id {id} not found"),
     INVALID_ROOM_CAPACITY("INVALID_ROOM_CAPACITY", HttpStatus.BAD_REQUEST, "The requested room capacity exceeds the maximum allowed capacity"),
     BOOKING_TIME_CONFLICT("BOOKING_TIME_CONFLICT", HttpStatus.CONFLICT, "The room is already booked for the selected time range"),
     USER_NOT_AUTHORIZED("USER_NOT_AUTHORIZED", HttpStatus.UNAUTHORIZED, "User is not authorized to perform this action"),
